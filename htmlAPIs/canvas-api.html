@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas API</title>
+</head>
+<body>
+    <h1>Canvas API Example</h1>
+    <p>Drawing shapes, texts and images on canvas</p>
+    <canvas id="myCanvas" width="600" height="400" style="border: 2px solid black;"></canvas>
+
+    <script>
+        const  canvas=document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        //Rectangle
+        ctx.fillStyle='yellow';
+        ctx.fillRect(50,50,150,100)
+    </script>
+    
+</body>
+</html>

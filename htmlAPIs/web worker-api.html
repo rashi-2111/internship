@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Worker API</title>
+</head>
+<body>
+    <h1>Web Worker API Example</h1>
+    <p>Count numbers without freezing the page</p> 
+     <button onclick="startWorker()">Start Worker</button>
+     <button onclick="stopWorker()">Stop Worker</button>
+
+     <p>Worker Count: <span id="result">0</span></p>
+     <p>Main Thread : <input type="text" placeholder="Type here the page won't freeze"></p>
+     <script>
+        let worker;
+        
+        function startWorker(){
+            if(typeof(Worker) !== "undefined"){
+                if(!worker){
+                const workerCode = `
+                    let count = 0;
+                    setInterval(function(){
+                        count++;
+                        postMessage(count);
+                    },1000)
+
+                `;
+                const blob = new Blob([workerCode], { type: 'application/javascript' });
+                worker = new Worker(URL.createObjectURL(blob));
+                worker.onmessage = function(e){
+                    document.getElementById('result').textContent = e.data
+                };
+                }
+            }else{
+                alert('Web Workers are not supported in this browser.')
+                }
+            
+        }
+        function stopWorker(){
+            if(worker){
+                worker.terminate();
+                worker = null;
+                
+            }
+        }
+        
+     </script>
+   
+</body>
+</html>

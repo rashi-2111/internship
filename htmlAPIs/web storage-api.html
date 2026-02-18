@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Storage API</title>
+</head>
+<body>
+    <h1>Web Storage API</h1>
+
+    <h3>Save Data</h3>
+    <input type ="text" id="nameInput" placeholder="Enter your name">
+    <button onclick="saveData()">Save to Local Storage</button>
+    <button onclick="saveSession()">Save to Session Storage</button>
+
+    <h3>Stored Data</h3>
+    <p>Local Storage : <span id="localData">None</span></p>
+    <p>Session Storage : <span id="sessionData">None</span></p>
+
+    <button onclick="clearData()">Clear All</button>
+    <script>
+        window.onload=function(){
+            document.getElementById('localData').textContent = localStorage.getItem('name')||'None'
+            document.getElementById('sessionData').textContent = sessionStorage.getItem('name')||'None'
+        }
+        function saveData(){
+            let name = document.getElementById('nameInput').value
+            localStorage.setItem('name',name)
+            document.getElementById('localData').textContent = name
+            alert('Data saved to Local Storage')
+        }
+        function saveSession(){
+            let name = document.getElementById('nameInput').value
+            sessionStorage.setItem('name',name)
+            document.getElementById('sessionData').textContent = name
+            alert('Data saved to Session Storage')
+        }
+        function clearData(){
+            localStorage.clear()
+            sessionStorage.clear()
+            document.getElementById('localData').textContent = 'None'
+            document.getElementById('sessionData').textContent = 'None'
+            document.getElementById('nameInput').value = ''
+            alert('All data cleared')
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop API</title>
+</head>
+<body>
+    <h1>Drag and Drop API Example</h1>
+    <p>Drag the items between the zones</p>
+    <div id = "zone1" style = "border: 2px solid black; padding: 20px; margin: 5 px;">
+        <h4>Zone 1</h4>  
+    <div draggable="true" style="background-color: darkblue; color: white; padding: 10px; margin: 5px; width: 100px;">item 1</div>
+    <div draggable="true" style="background-color: darkorchid; color: white; padding: 10px; margin: 5px; width: 100px;">item 2</div> 
+    <div draggable="true" style="background-color: darkolivegreen; color: white; padding: 10px; margin: 5px; width: 100px;">item 3</div>
+    </div>
+
+    <br>
+
+    <div id = "zone2" style = "border: 2px solid black; padding: 20px; margin: 5 px; ">
+        <h4>Zone 2</h4> 
+     </div> 
+     <script>
+        let draggedElement;
+        document.addEventListener('dragstart', function(e) {
+            if(e.target.draggable) {
+                draggedElement = e.target;
+               
+            }
+        })
+        document.addEventListener('dragover',function(e){
+            e.preventDefault()
+        })
+        document.addEventListener('drop',function(e){
+           
+            if(e.target.id === 'zone1' || e.target.id === 'zone2'){
+                e.target.appendChild(draggedElement)
+            }
+        })
+     </script>       
+</body>
+</html>
